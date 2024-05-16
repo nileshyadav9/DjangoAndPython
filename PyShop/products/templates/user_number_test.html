@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form id="myForm">
+    <div class="mb-3">
+        <label for="name" class="form-label">UserName:</label>
+        <input type="email" class="form-control" id="name" aria-describedby="emailHelp">
+<!--        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>-->
+    </div>
+    <div class="mb-3">
+        <label for="usernumber" class="form-label">UserNumber:</label>
+        <input type="number" class="form-control" id="usernumber">
+    </div>
+<!--    <div class="mb-3 form-check">-->
+<!--        <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+<!--        <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
+<!--    </div>-->
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#myForm').on('submit', function(e){
+            e.preventDefault();
+
+            $.ajax({
+                url : $(this).attr('action') || window.location.pathname,
+                type: "POST",
+                data: $(this).serialize(),
+                success: function (data) {
+                    if (data.success) {
+                        alert('Data saved successfully!');
+                        $('#myForm')[0].reset();
+                    }
+                },
+                error: function (jXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        });
+    });
+</script>

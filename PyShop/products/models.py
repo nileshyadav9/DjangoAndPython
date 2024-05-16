@@ -13,3 +13,8 @@ class Offer(models.Model):
     description = models.CharField(max_length=255)
     discount = models.FloatField()
 
+
+class UserNumberTest(models.Model):
+    username = models.CharField(max_length=10)
+    usernumber = models.IntegerField()
+
